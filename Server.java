@@ -45,8 +45,19 @@ public class Server {
                         try {
                             FileInputStream readFile = new FileInputStream(file);
                             out.println("ok");
-                            System.out.println("--- start sending file ---");
 
+                            // print out the content for test purpose
+                            System.out.println("\n--- displaying file content ---\n");
+                            InputStreamReader readerTest = new InputStreamReader(new FileInputStream(file));
+                            BufferedReader buffer = new BufferedReader(readerTest);
+                            String line;
+                            while ((line = buffer.readLine()) != null) {
+                                System.out.println(line);
+                            }
+                            System.out.println("\n--- end ---\n");
+
+                            // start sending file
+                            System.out.println("start sending file");
                             // file name and file length
                             sendFile.writeUTF(file.getName());
                             sendFile.flush();
@@ -60,7 +71,7 @@ public class Server {
                                 sendFile.write(sendBytes, 0, length);
                                 sendFile.flush();
                             }
-                            System.out.println("--- finish sending file ---");
+                            System.out.println("finish sending file");
                         }
                         catch (IOException ex) {
                             System.out.println("ERROR: file not exist");

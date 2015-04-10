@@ -35,7 +35,7 @@ public class Client {
         try {
             while (true) {
                 System.out.print("\nUser, enter the command: ");
-                String command = userEntry.readLine();
+                String command = userEntry.readLine().trim();
                 // judge whether the command is valid
                 command = judgeCommand(command);
 
@@ -67,16 +67,16 @@ public class Client {
 
     private String judgeCommand(String command) {
         // if command is GET <***>    
-        if (command.length() > 6 && command.charAt(command.length() - 1) == '>' && command.substring(0, 5).equals("GET <")) {
+        if (command.length() > 4 && command.substring(0, 4).equals("GET ")) {
                     System.out.println("judge GET <>");
-                    subCommand = command.substring(5, command.length() - 1);
+                    subCommand = command.substring(4, command.length()).trim();
                     System.out.println(subCommand);
                     return "GET";
         }
         // if command is BOUNCE <***>
-        else if (command.length() > 9 && command.charAt(command.length() - 1) == '>' && command.substring(0, 8).equals("BOUNCE <")) {
+        else if (command.length() > 7 && command.substring(0, 7).equals("BOUNCE ")) {
             System.out.println("judge BOUNCE <>");
-            subCommand = command.substring(8, command.length() - 1);
+            subCommand = command.substring(7, command.length()).trim();
             System.out.println(subCommand);
             return "BOUNCE";
         }
@@ -88,9 +88,9 @@ public class Client {
                 return command;
             }
             // if command is EXIT <***>
-            else if (command.length() > 7 && command.substring(3, 6).equals("T <") && command.charAt(command.length() - 1) == '>') {
+            else if (command.length() > 5 && command.substring(3, 5).equals("T ")) {
                     System.out.println("judge EXIT <>");
-                    subCommand = command.substring(6, command.length() - 1);
+                    subCommand = command.substring(5, command.length()).trim();
                     System.out.println(subCommand);
                     return "EXIT";
             }
@@ -104,6 +104,7 @@ public class Client {
     private void get(String command) {
         try {
             out.println(command);
+            out.println(subCommand);
             serverResponse = in.readLine();
 
             if (serverResponse.equals("ok")) {
@@ -133,8 +134,15 @@ public class Client {
 
 
     private void bounce(String command) {
-        System.out.println("Still developing!");
-        out.println(command);   
+        try {
+            System.out.println("Still developing!");
+            out.println(command);
+            out.println(subCommand);
+            System.out.println("Server says: " + in.readLine());       
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 

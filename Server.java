@@ -5,6 +5,8 @@ import java.net.*;
  * Created by Hon on 4/7/2015.
  */
 public class Server {
+    // private String clientResponse;
+
     public static void main(String[] args) {
         // if (args.length != 1) { // Test for correct num. of args
         //     System.out.println("ERROR server port number not given");
@@ -30,17 +32,26 @@ public class Server {
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(s_sock.getOutputStream()), true);
                 DataOutputStream sendFile = new DataOutputStream(s_sock.getOutputStream());
                 String command;
+                String clientResponse;
 
                 while (true) {
                     System.out.println("\nWaiting for command...");
                     command = in.readLine();
                     System.out.println("Client's command: " + command);
                     if (command.equals("EXIT")) {
-                        break;
+                        clientResponse = in.readLine();
+                        if (clientResponse.equals("none")) {
+                            System.out.println("Normal_Exit");
+                        }
+                        else {
+                            System.out.println(clientResponse);
+                        }
+                            break;
                     }
                     else if (command.equals("GET")) {
 //                        System.out.print("Server, enter your message: ");
 //                        out.println(userEntry.readLine());
+                        clientResponse = in.readLine();
                         File file = new File("files/ClientFile.txt");
                         try {
                             FileInputStream readFile = new FileInputStream(file);

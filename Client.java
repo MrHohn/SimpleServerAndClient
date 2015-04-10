@@ -32,10 +32,11 @@ public class Client {
 
 
     public void run() {
+        String command;
         try {
             while (true) {
                 System.out.print("\nUser, enter the command: ");
-                String command = userEntry.readLine().trim();
+                command = userEntry.readLine().trim();
                 // judge whether the command is valid
                 command = judgeCommand(command);
 
@@ -68,20 +69,16 @@ public class Client {
     private String judgeCommand(String command) {
         // if command is GET <***>    
         if (command.length() > 4 && command.substring(0, 4).equals("GET ")) {
-                    System.out.println("judge GET <>");
                     subCommand = command.substring(4, command.length()).trim();
                     System.out.println(subCommand);
                     return "GET";
         }
         // if command is BOUNCE <***>
         else if (command.length() > 7 && command.substring(0, 7).equals("BOUNCE ")) {
-            System.out.println("judge BOUNCE <>");
             subCommand = command.substring(7, command.length()).trim();
-            System.out.println(subCommand);
             return "BOUNCE";
         }
         else if (command.length() >= 4 && command.substring(0, 4).equals("EXIT")) {
-            System.out.println("judge EXIT");
             // if command is EXIT
             if (command.length() == 4) {
                 subCommand = "none";
@@ -89,9 +86,7 @@ public class Client {
             }
             // if command is EXIT <***>
             else if (command.length() > 5 && command.substring(3, 5).equals("T ")) {
-                    System.out.println("judge EXIT <>");
                     subCommand = command.substring(5, command.length()).trim();
-                    System.out.println(subCommand);
                     return "EXIT";
             }
         }
@@ -135,10 +130,9 @@ public class Client {
 
     private void bounce(String command) {
         try {
-            System.out.println("Still developing!");
             out.println(command);
             out.println(subCommand);
-            System.out.println("Server says: " + in.readLine());       
+            System.out.println("Server BOUNCE: " + in.readLine());       
         }
         catch (IOException ex) {
             ex.printStackTrace();

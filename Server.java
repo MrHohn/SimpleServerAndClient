@@ -24,7 +24,7 @@ public class Server {
             System.out.println("\nWaiting for client to connect...");
             try {
                 Socket s_sock = rv_sock.accept();
-                System.out.println("one client is connected");
+                System.out.println("\nOne client is connected.");
 //                BufferedReader userEntry = new BufferedReader(new InputStreamReader(System.in));
                 BufferedReader in = new BufferedReader(new InputStreamReader(s_sock.getInputStream()));
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(s_sock.getOutputStream()), true);
@@ -32,9 +32,9 @@ public class Server {
                 String command;
 
                 while (true) {
-                    System.out.println("waiting for client's command");
+                    System.out.println("\nWaiting for command...");
                     command = in.readLine();
-                    System.out.println("Client's message: " + command);
+                    System.out.println("Client's command: " + command);
                     if (command.equals("EXIT")) {
                         break;
                     }
@@ -47,17 +47,17 @@ public class Server {
                             out.println("ok");
 
                             // print out the content for test purpose
-                            System.out.println("\n--- displaying file content ---\n");
+                            System.out.println("\n--- Displaying file content ---\n");
                             InputStreamReader readerTest = new InputStreamReader(new FileInputStream(file));
                             BufferedReader buffer = new BufferedReader(readerTest);
                             String line;
                             while ((line = buffer.readLine()) != null) {
                                 System.out.println(line);
                             }
-                            System.out.println("\n--- end ---\n");
+                            System.out.println("\n--- End ---\n");
 
                             // start sending file
-                            System.out.println("start sending file");
+                            System.out.println("Start sending file...");
                             // file name and file length
                             sendFile.writeUTF(file.getName());
                             sendFile.flush();
@@ -71,7 +71,7 @@ public class Server {
                                 sendFile.write(sendBytes, 0, length);
                                 sendFile.flush();
                             }
-                            System.out.println("finish sending file");
+                            System.out.println("Finish sending file...\n");
                         }
                         catch (IOException ex) {
                             System.out.println("ERROR: file not exist");
@@ -84,7 +84,6 @@ public class Server {
 
                     }
                 }
-                System.out.println("here");
                 sendFile.close();
                 s_sock.close();
             }

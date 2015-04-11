@@ -103,6 +103,7 @@ public class Client {
 
     private void get(String command) {
         try {
+            // send the command to the server
             out.println(command);
             out.println(subCommand);
             serverResponse = in.readLine();
@@ -135,6 +136,7 @@ public class Client {
 
     private void bounce(String command) {
         try {
+            // send the command to the server
             out.println(command);
             out.println(subCommand);
             System.out.println("Server BOUNCE: " + in.readLine());       
@@ -147,6 +149,7 @@ public class Client {
 
     private void exit(String command) {
         try {
+            // send the command to the server
             out.println(command);
             out.println(subCommand);
             receiveFile.close();

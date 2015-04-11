@@ -47,7 +47,8 @@ public class Server {
             try {
                 s_sock = rv_sock.accept();
                 initNew(s_sock); // initialize a new socket for a new client
-                System.out.println("\nClient <" + count + "> is connected.");     
+                out.println(1); // send the very first response to client
+                System.out.println("\n----------- Client <" + count + "> is connected ------------");     
 
                 while (true) {
                     System.out.println("\nWaiting for command...");
@@ -76,8 +77,11 @@ public class Server {
 
         try {
             clientResponse = in.readLine();
+            System.out.println("File the user retrieving: <" + clientResponse + ">");
             File file = new File("files/" + clientResponse);
-            FileInputStream readFile = new FileInputStream(file);
+            FileInputStream readFile = new FileInputStream(file); // if file not exist, the program would throw out exception here
+
+            // inform the client if file exist
             out.println("ok");
 
             // print out the content for test purpose
@@ -108,7 +112,8 @@ public class Server {
             System.out.println("Finish sending file...\n");
         }
         catch (IOException ex) {
-            System.out.println("ERROR: file not exist");
+            System.out.println("ERROR: no such file");
+            // if file not exist, inform the client
             out.println("none");
         }
     }
@@ -116,6 +121,7 @@ public class Server {
 
     private void bounce() {
         try {
+            // bounce the command
             out.println(in.readLine());
         }
         catch (IOException ex) {
@@ -128,11 +134,14 @@ public class Server {
         try {
             clientResponse = in.readLine();
             if (clientResponse.equals("none")) {
+                // default exit
                 System.out.println("Exit code: Normal_Exit");
             }
             else {
+                // specific exit
                 System.out.println("Exit code: " + clientResponse);
             }
+            System.out.println("\n------------- Close the connection -------------");
             sendFile.close();
             s_sock.close();
         }

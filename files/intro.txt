@@ -1,3 +1,3 @@
-This is a client file.
+This is an introduction file.
 The server would send this file to any client if requested.
 End.

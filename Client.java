@@ -34,6 +34,10 @@ public class Client {
     public void run() {
         String command;
         try {
+            System.out.println("Wait for server's response");
+            in.readLine(); // the very first response from server
+            System.out.println("-------------- Connected ---------------");
+
             while (true) {
                 System.out.print("\nUser, enter the command: ");
                 command = userEntry.readLine().trim();
@@ -59,6 +63,8 @@ public class Client {
                     System.out.println("ERROR: Invalid command.");
                 }
             }
+
+            System.out.println("------------- Disconnected --------------");
         }
         catch (IOException ex) {
             ex.printStackTrace();
@@ -70,7 +76,6 @@ public class Client {
         // if command is GET <***>    
         if (command.length() > 4 && command.substring(0, 4).equals("GET ")) {
                     subCommand = command.substring(4, command.length()).trim();
-                    System.out.println(subCommand);
                     return "GET";
         }
         // if command is BOUNCE <***>
@@ -119,7 +124,7 @@ public class Client {
                 System.out.println("\n\n--- FILE END --- ");
             }
             else {
-                System.out.println("ERROR: File not exist.");
+                System.out.println("ERROR: no such file");
             }
         }
         catch (IOException ex) {
@@ -157,4 +162,5 @@ public class Client {
         Client client = new Client();
         client.run();
     }
+
 }

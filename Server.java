@@ -78,7 +78,7 @@ public class Server {
         try {
             clientResponse = in.readLine();
             System.out.println("File the user retrieving: <" + clientResponse + ">");
-            File file = new File("files/" + clientResponse);
+            File file = new File(clientResponse);
             FileInputStream readFile = new FileInputStream(file); // if file not exist, the program would throw out exception here
 
             // inform the client if file exist

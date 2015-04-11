@@ -17,13 +17,20 @@ HOW TO USE
 
 					This command would send a request to the server to retrieve the FileName file. After the server successfully sends the file, the client side would display contents in the file. Otherwise it would prompt error like "ERROR: no such file"
 
+					Sample command: GET sample1.txt
+
 				(2) BOUNCE YourMessage
 
 					By sending BOUNCE YourMessage to server, the server would simply bounce the same message back to the client. The client would then display this message.			
 
+					Sample command: BOUNCE connecting status
+
 				(3) EXIT or EXIT ExitCode
 
 					This command is used to close the connection. EXIT means exit by default while EXIT ExitCode contains specific code for exit. Both the server and the client would close the connection after the command occurred. Beside the server side would display ExitCode specifically if it is sent, otherwise it would print out normal_exit. The client program would be closed in the end.
+
+					Sample command: EXIT VIM_ERRORCODE_3.17.223
+
 				
 				PS: For all commands, spaces in the begin and in the end are allowed, the program would use trim() function to trim them. Please notice that the lower cases "get", "bounce", "exit" are not accepted for this program.	
 
@@ -50,7 +57,7 @@ RUN
 ---------------------------------------------------------------
 FILES FOR TRANSFER
 
-	The files used for transfer from server to client is put in the files folder. Please simply put the folder in the same path as the Server.java file. There are totally three files: <intro.txt>, <gzip.txt>, <gcc.txt>.
+	The files used for transfer from server to client is supposed to be put in the same folder. Hence please simply put the files in the same path as the Server.java file. There are totally three sample files: <sample1.txt>, <sample2.txt>, <sample3.txt>.
 
 ---------------------------------------------------------------
 END
